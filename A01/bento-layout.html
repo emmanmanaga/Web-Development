@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IT Career Paths - Bento Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        .card {
+            overflow: hidden;
+        }
+
+        .card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 768px) {
+            .container-fluid {
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+            }
+
+            .container-fluid > .row:last-child {
+                flex: 1 1 0;
+                min-height: 0;
+                overflow: hidden;
+            }
+
+            .container-fluid > .row:last-child .card {
+                height: 100% !important;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .card-img-overlay h4 {
+                font-size: 1rem;
+            }
+
+            .card-img-overlay h5 {
+                font-size: 0.875rem;
+            }
+
+            .card-img-overlay h6 {
+                font-size: 0.75rem;
+            }
+
+            .text-bg-secondary h3 {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .card-img-overlay {
+                padding: 0.5rem;
+            }
+
+            .card-img-overlay h4,
+            .card-img-overlay h5,
+            .card-img-overlay h6 {
+                max-width: 100%;
+                overflow-wrap: anywhere;
+            }
+
+            .card-img-overlay h4 {
+                font-size: 0.75rem;
+            }
+
+            .card-img-overlay h5 {
+                font-size: 0.6875rem;
+            }
+
+            .card-img-overlay h6 {
+                font-size: 0.625rem;
+            }
+
+            .text-bg-secondary h3 {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid p-3 pb-2">
+        <div class="row">
+            <div class="col-7">
+                <div class="row">
+                    <div class="col-12 p-1">
+                        <div class="card text-bg-dark border-0" style="height: 240px;">
+                            <img src="Mobile development-bro.png" class="card-img" alt="Mobile development">
+                            <div class="card-img-overlay">
+                                <h4 class="d-table bg-dark bg-opacity-75 p-2 rounded">1. Software and Full-Stack Development</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 p-1">
+                        <div class="card text-bg-secondary bg-gradient border-0 p-3 text-center justify-content-center" style="height: 120px;">
+                            <h3 class="mb-0">The Many Career Paths in IT</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <div class="row">
+                    <div class="col-12 p-1">
+                        <div class="card text-bg-dark border-0" style="height: 120px;">
+                            <img src="Artificial intelligence-amico.png" class="card-img" alt="Artificial intelligence">
+                            <div class="card-img-overlay">
+                                <h4 class="d-table bg-dark bg-opacity-75 p-2 rounded">2. Data Science, AI &amp; Database Admin</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 p-1">
+                        <div class="card text-bg-dark border-0" style="height: 240px;">
+                            <img src="Privacy policy-rafiki.png" class="card-img" alt="Cybersecurity">
+                            <div class="card-img-overlay">
+                                <h5 class="d-table bg-dark bg-opacity-75 p-2 rounded">3. Cybersecurity</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="row">
+                            <div class="col-12 p-1">
+                                <div class="card text-bg-dark border-0" style="height: 116px;">
+                                    <img src="Server-bro.png" class="card-img" alt="Network and cloud computing">
+                                    <div class="card-img-overlay">
+                                        <h6 class="d-table bg-dark bg-opacity-75 p-2 rounded">4. Network &amp; Cloud</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 p-1">
+                                <div class="card text-bg-dark border-0" style="height: 116px;">
+                                    <img src="UI-UX design-amico.png" class="card-img" alt="UI and UX design">
+                                    <div class="card-img-overlay">
+                                        <h6 class="d-table bg-dark bg-opacity-75 p-2 rounded">5. UI/UX Design</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 p-1 pb-0">
+                <div class="card text-bg-dark border-0" style="height: 160px;">
+                    <img src="QA engineers-amico.png" class="card-img" alt="Quality assurance engineering">
+                    <div class="card-img-overlay">
+                        <h5 class="d-table bg-dark bg-opacity-75 p-2 rounded">6. DevOps &amp; QA</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 p-1 pb-0">
+                <div class="card text-bg-dark border-0" style="height: 160px;">
+                    <img src="Video game developer-bro.png" class="card-img" alt="Video game development">
+                    <div class="card-img-overlay">
+                        <h5 class="d-table bg-dark bg-opacity-75 p-2 rounded">7. Game Dev</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 p-1 pb-0">
+                <div class="card text-bg-dark border-0" style="height: 160px;">
+                    <img src="Bitcoin P2P-bro.png" class="card-img" alt="Blockchain technology">
+                    <div class="card-img-overlay">
+                        <h5 class="d-table bg-dark bg-opacity-75 p-2 rounded">8. Web3 &amp; Blockchain</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
