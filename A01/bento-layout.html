@@ -12,6 +12,61 @@
             overflow: hidden;
         }
 
+        .career-card {
+            --glow-color: 13, 202, 240;
+            isolation: isolate;
+            transition: box-shadow 0.35s ease;
+        }
+
+        .career-card-full-stack {
+            --glow-color: 146, 227, 169;
+        }
+
+        .career-card-ai {
+            --glow-color: 64, 123, 255;
+        }
+
+        .title-card {
+            --glow-color: 128, 128, 128;
+            transition: box-shadow 0.35s ease;
+        }
+
+        .career-card-cybersecurity {
+            --glow-color: 75, 0, 130;
+        }
+
+        .career-card-network {
+            --glow-color: 186, 104, 200;
+        }
+
+        .career-card-ui-ux {
+            --glow-color: 197, 63, 63;
+        }
+
+        .career-card-devops {
+            --glow-color: 255, 165, 0;
+        }
+
+        .career-card-game-dev {
+            --glow-color: 255, 255, 0;
+        }
+
+        .career-card-web3 {
+            --glow-color: 198, 255, 0;
+        }
+
+        .career-card:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 3px;
+        }
+
+        .career-card:hover,
+        .career-card:focus,
+        .career-card:focus-within,
+        .title-card:hover {
+            box-shadow: 0 0 1rem 0.25rem rgba(var(--glow-color), 0.75);
+        }
+
         .card-img {
             position: absolute;
             top: 0;
@@ -19,6 +74,79 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.45s ease, filter 0.35s ease;
+        }
+
+        .career-card:hover .card-img,
+        .career-card:focus .card-img,
+        .career-card:focus-within .card-img {
+            transform: scale(1.04);
+            filter: brightness(0.8);
+        }
+
+        .card-reveal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            color: #fff;
+            opacity: 1;
+            width: 66.6667%;
+            transform: translateX(-101%);
+            transition: transform 0.45s ease;
+        }
+
+        .card-reveal-full-stack {
+            background: #92E3A9;
+            color: #000;
+        }
+
+        .card-reveal-ai {
+            background: #407BFF;
+        }
+
+        .card-reveal-cybersecurity {
+            background: #4B0082;
+        }
+
+        .card-reveal-network {
+            background: #BA68C8;
+        }
+
+        .card-reveal-ui-ux {
+            background: #C53F3F;
+        }
+
+        .card-reveal-devops {
+            background: #FFA500;
+        }
+
+        .card-reveal-game-dev {
+            background: #FFFF00;
+            color: #000;
+        }
+
+        .card-reveal-web3 {
+            background: #C6FF00;
+            color: #000;
+        }
+
+        .career-card:hover .card-reveal,
+        .career-card:focus .card-reveal,
+        .career-card:focus-within .card-reveal {
+            transform: translateX(0);
+        }
+
+        .card-reveal h4,
+        .card-reveal h5,
+        .card-reveal h6 {
+            margin-bottom: 0.35rem;
+        }
+
+        .card-reveal p {
+            margin: 0;
+            font-size: 0.875rem;
+            line-height: 1.3;
         }
 
         @media (min-width: 768px) {
@@ -40,16 +168,20 @@
         }
 
         @media (min-width: 768px) and (max-width: 991.98px) {
-            .card-img-overlay h4 {
+            .card-reveal h4 {
                 font-size: 1rem;
             }
 
-            .card-img-overlay h5 {
+            .card-reveal h5 {
                 font-size: 0.875rem;
             }
 
-            .card-img-overlay h6 {
+            .card-reveal h6 {
                 font-size: 0.75rem;
+            }
+
+            .card-reveal p {
+                font-size: 0.6875rem;
             }
 
             .text-bg-secondary h3 {
@@ -58,27 +190,36 @@
         }
 
         @media (max-width: 767.98px) {
-            .card-img-overlay {
+            .card-reveal {
+                width: 75%;
                 padding: 0.5rem;
             }
 
-            .card-img-overlay h4,
-            .card-img-overlay h5,
-            .card-img-overlay h6 {
+            .card-reveal-cybersecurity {
+                width: 80%;
+            }
+
+            .card-reveal h4,
+            .card-reveal h5,
+            .card-reveal h6 {
                 max-width: 100%;
                 overflow-wrap: anywhere;
             }
 
-            .card-img-overlay h4 {
+            .card-reveal h4 {
                 font-size: 0.75rem;
             }
 
-            .card-img-overlay h5 {
+            .card-reveal h5 {
                 font-size: 0.6875rem;
             }
 
-            .card-img-overlay h6 {
+            .card-reveal h6 {
                 font-size: 0.625rem;
+            }
+
+            .card-reveal p {
+                font-size: 0.5625rem;
             }
 
             .text-bg-secondary h3 {
@@ -94,17 +235,18 @@
             <div class="col-7">
                 <div class="row">
                     <div class="col-12 p-1">
-                        <div class="card text-bg-dark border-0" style="height: 240px;">
+                        <div class="card career-card career-card-full-stack text-bg-dark border-0" style="height: 240px;" tabindex="0">
                             <img src="Mobile development-bro.png" class="card-img" alt="Mobile development">
-                            <div class="card-img-overlay">
-                                <h4 class="d-table bg-dark bg-opacity-75 p-2 rounded">1. Software and Full-Stack Development</h4>
+                            <div class="card-img-overlay card-reveal card-reveal-full-stack p-3">
+                                <h4>1. Software and Full-Stack Development</h4>
+                                <p>Build apps, websites, and software people use every day.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 p-1">
-                        <div class="card text-bg-secondary bg-gradient border-0 p-3 text-center justify-content-center" style="height: 120px;">
+                        <div class="card text-bg-secondary title-card bg-dark border-0 p-3 text-center justify-content-center" style="height: 120px;">
                             <h3 class="mb-0">The Many Career Paths in IT</h3>
                         </div>
                     </div>
@@ -114,40 +256,44 @@
             <div class="col-5">
                 <div class="row">
                     <div class="col-12 p-1">
-                        <div class="card text-bg-dark border-0" style="height: 120px;">
+                        <div class="card career-card career-card-ai text-bg-dark border-0" style="height: 120px;" tabindex="0">
                             <img src="Artificial intelligence-amico.png" class="card-img" alt="Artificial intelligence">
-                            <div class="card-img-overlay">
-                                <h4 class="d-table bg-dark bg-opacity-75 p-2 rounded">2. Data Science, AI &amp; Database Admin</h4>
+                            <div class="card-img-overlay card-reveal card-reveal-ai p-3">
+                                <h4>2. Data Science, AI &amp; Database Admin</h4>
+                                <p>Turn data into insights and intelligent tools.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-7 p-1">
-                        <div class="card text-bg-dark border-0" style="height: 240px;">
+                        <div class="card career-card career-card-cybersecurity text-bg-dark border-0" style="height: 240px;" tabindex="0">
                             <img src="Privacy policy-rafiki.png" class="card-img" alt="Cybersecurity">
-                            <div class="card-img-overlay">
-                                <h5 class="d-table bg-dark bg-opacity-75 p-2 rounded">3. Cybersecurity</h5>
+                            <div class="card-img-overlay card-reveal card-reveal-cybersecurity p-3">
+                                <h5>3. Cybersecurity</h5>
+                                <p>Protect systems, data, and people from online threats.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-5">
                         <div class="row">
                             <div class="col-12 p-1">
-                                <div class="card text-bg-dark border-0" style="height: 116px;">
+                                <div class="card career-card career-card-network text-bg-dark border-0" style="height: 116px;" tabindex="0">
                                     <img src="Server-bro.png" class="card-img" alt="Network and cloud computing">
-                                    <div class="card-img-overlay">
-                                        <h6 class="d-table bg-dark bg-opacity-75 p-2 rounded">4. Network &amp; Cloud</h6>
+                                    <div class="card-img-overlay card-reveal card-reveal-network p-2">
+                                        <h6>4. Network &amp; Cloud</h6>
+                                        <p>Connect devices and run services in the cloud.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 p-1">
-                                <div class="card text-bg-dark border-0" style="height: 116px;">
+                                <div class="card career-card career-card-ui-ux text-bg-dark border-0" style="height: 116px;" tabindex="0">
                                     <img src="UI-UX design-amico.png" class="card-img" alt="UI and UX design">
-                                    <div class="card-img-overlay">
-                                        <h6 class="d-table bg-dark bg-opacity-75 p-2 rounded">5. UI/UX Design</h6>
+                                    <div class="card-img-overlay card-reveal card-reveal-ui-ux p-2">
+                                        <h6>5. UI/UX Design</h6>
+                                        <p>Make digital products useful and enjoyable.</p>
                                     </div>
                                 </div>
                             </div>
@@ -159,26 +305,29 @@
 
         <div class="row">
             <div class="col-4 p-1 pb-0">
-                <div class="card text-bg-dark border-0" style="height: 160px;">
+                <div class="card career-card career-card-devops text-bg-dark border-0" style="height: 160px;" tabindex="0">
                     <img src="QA engineers-amico.png" class="card-img" alt="Quality assurance engineering">
-                    <div class="card-img-overlay">
-                        <h5 class="d-table bg-dark bg-opacity-75 p-2 rounded">6. DevOps &amp; QA</h5>
+                    <div class="card-img-overlay card-reveal card-reveal-devops p-3">
+                        <h5>6. DevOps &amp; QA</h5>
+                        <p>Automate delivery and help software stay reliable.</p>
                     </div>
                 </div>
             </div>
             <div class="col-3 p-1 pb-0">
-                <div class="card text-bg-dark border-0" style="height: 160px;">
+                <div class="card career-card career-card-game-dev text-bg-dark border-0" style="height: 160px;" tabindex="0">
                     <img src="Video game developer-bro.png" class="card-img" alt="Video game development">
-                    <div class="card-img-overlay">
-                        <h5 class="d-table bg-dark bg-opacity-75 p-2 rounded">7. Game Dev</h5>
+                    <div class="card-img-overlay card-reveal card-reveal-game-dev p-3">
+                        <h5>7. Game Dev</h5>
+                        <p>Create the worlds and mechanics behind games.</p>
                     </div>
                 </div>
             </div>
             <div class="col-5 p-1 pb-0">
-                <div class="card text-bg-dark border-0" style="height: 160px;">
+                <div class="card career-card career-card-web3 text-bg-dark border-0" style="height: 160px;" tabindex="0">
                     <img src="Bitcoin P2P-bro.png" class="card-img" alt="Blockchain technology">
-                    <div class="card-img-overlay">
-                        <h5 class="d-table bg-dark bg-opacity-75 p-2 rounded">8. Web3 &amp; Blockchain</h5>
+                    <div class="card-img-overlay card-reveal card-reveal-web3 p-3">
+                        <h5>8. Web3 &amp; Blockchain</h5>
+                        <p>Build decentralized applications and digital assets.</p>
                     </div>
                 </div>
             </div>
