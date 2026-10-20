@@ -226,6 +226,38 @@
                 font-size: 0.875rem;
             }
         }
+
+        @media (orientation: landscape) and (max-height: 600px) {
+            .container-fluid {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .career-card-full-stack,
+            .career-card-cybersecurity {
+                height: 150px !important;
+            }
+
+            .title-card,
+            .career-card-ai {
+                height: 75px !important;
+            }
+
+            .career-card-network,
+            .career-card-ui-ux {
+                height: 70px !important;
+            }
+
+            .container-fluid > .row:last-child {
+                flex: 0 0 auto;
+                min-height: 0;
+                overflow: visible;
+            }
+
+            .container-fluid > .row:last-child .card {
+                height: 100px !important;
+            }
+        }
     </style>
 </head>
 
