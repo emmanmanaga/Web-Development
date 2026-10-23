@@ -5,185 +5,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>World Architecture & Landmarks</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <style>
-        /* Deep Tech Background with Subtle Coordinate Grid & Ambient Glow */
-        body {
-            background-color: #050811;
-            background-image:
-                radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.12), transparent 35%),
-                radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.12), transparent 35%),
-                linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
-            color: #e2e8f0;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        /* Glassmorphic Map HUD Container */
-        .map-box {
-            position: relative;
-            max-width: 1150px;
-            margin: 0 auto;
-            background: rgba(15, 23, 42, 0.55);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(16, 185, 129, 0.05);
-            overflow: hidden;
-        }
-
-        /* Holographic Cyan/Emerald Tinted World Map */
-        .map-img {
-            width: 100%;
-            display: block;
-            filter: invert(1) sepia(1) hue-rotate(135deg) saturate(2.5) brightness(0.7) opacity(0.45);
-        }
-
-        /* Glowing Radar-Beacon Pins */
-        .pin {
-            position: absolute;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(16, 185, 129, 0.2);
-            backdrop-filter: blur(4px);
-            color: #ecfdf5;
-            border: 1.5px solid #10b981;
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
-            font-size: 10px;
-            font-family: monospace;
-            font-weight: 700;
-            padding: 0;
-            line-height: 23px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            z-index: 2;
-        }
-
-        .pin:hover {
-            transform: translate(-50%, -50%) scale(1.45);
-            background: #10b981;
-            color: #050811;
-            box-shadow: 0 0 22px #10b981, 0 0 40px rgba(16, 185, 129, 0.8);
-            z-index: 10;
-        }
-
-        /* Glassmorphism Cards */
-        .card {
-            background: rgba(15, 23, 42, 0.45) !important;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 16px;
-            color: #f8fafc;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            background: rgba(30, 41, 59, 0.65) !important;
-            border-color: rgba(16, 185, 129, 0.5) !important;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 20px rgba(16, 185, 129, 0.15);
-        }
-
-        .card img {
-            width: 100%;
-            height: 190px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.4s ease;
-        }
-
-        .card:hover img {
-            transform: scale(1.03);
-        }
-
-        /* Tech Badges & Monospace Accents */
-        .tech-badge {
-            background: rgba(16, 185, 129, 0.12);
-            color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            font-family: monospace;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .tech-label {
-            color: #94a3b8;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Glassmorphism Modal */
-        .modal-content {
-            background: rgba(10, 15, 29, 0.8) !important;
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            border-radius: 20px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(16, 185, 129, 0.15);
-        }
-
-        .modal-img {
-            width: 100%;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container py-4">
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"></path>
+        </svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+                d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+            </path>
+        </svg>
+    </button>
 
-        <!-- HEADER -->
-        <div class="row mb-3">
-            <div class="col-12 text-center">
-                <span class="badge tech-badge rounded-pill px-3 py-2 mb-2">GEOSPATIAL ARCHITECTURE INDEX // v1.0</span>
-                <h2 class="fw-bold text-white tracking-tight">World Architectural Landmarks</h2>
-                <p class="text-secondary small">Select a coordinate beacon on the map or inspect a data card below</p>
+    <section class="map-box" id="world-map" aria-label="Interactive world map of architectural landmarks">
+        <div class="map-canvas">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
+                class="map-img" alt="World map">
+            <div class="pin-layer" id="map-pins"></div>
+            <span class="landmark-float" id="landmark-preview" aria-live="polite"></span>
+            <div class="hero-copy" id="hero-copy">
+                <p class="hero-eyebrow">Architecture around the world</p>
+                <h1 class="hero-title">World Architectural Landmarks</h1>
+                <p class="hero-subtitle">Explore from side to side, then select a marker for details.</p>
             </div>
         </div>
+    </section>
 
-        <!-- INTERACTIVE MAP -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="map-box p-3" id="map-pins">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
-                        class="map-img" alt="World Map">
-                </div>
-            </div>
+    <section class="detail-overlay" id="detail-overlay" data-open="false" data-zoomed="false" aria-hidden="true"
+        aria-label="Landmark details">
+        <div class="zoom-scene" id="zoom-scene" aria-hidden="true">
+            <img class="zoom-map"
+                src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" alt="">
+            <span class="zoom-marker" id="zoom-marker"></span>
         </div>
-
-        <!-- CARD GRID -->
-        <div class="row g-3" id="parent">
-
-        </div>
-
-        <!-- MODALS CONTAINER -->
-        <div id="modals">
-
-        </div>
-
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+        <button class="detail-close" id="detail-close" type="button" aria-label="Close landmark details">×</button>
+        <div class="detail-content" id="detail-content" role="dialog" aria-modal="true"
+            aria-labelledby="detail-title"></div>
+    </section>
 
     <script>
         var landmarks = [
@@ -196,12 +60,10 @@
                 architect: "Hemiunu",
                 description: "The oldest and largest of the pyramids in the Giza pyramid complex, and the only surviving structure of the Seven Wonders of the Ancient World.",
                 facts: ["Constructed using around 2.3 million limestone blocks", "Tallest man-made structure in the world for over 3,800 years"],
-                image: "assets/images/landmarks/pyramid_of_giza.jpg",
+                image: "assets/images/landmarks/great-pyramid-of-giza.png",
+                transparentImage: true,
                 top: "38%",
-                left: "55%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "55%"
             }, {
                 id: 2,
                 name: "Great Ziggurat of Ur",
@@ -211,12 +73,10 @@
                 architect: "King Ur-Nammu",
                 description: "A massive stepped mud-brick temple complex built during the Early Bronze Age in ancient Mesopotamia in honor of the moon god Nanna.",
                 facts: ["Built with a core of mud brick covered in baked bricks set in bitumen", "Features three monumental triple staircases converging at a gate"],
-                image: "assets/images/landmarks/ziggurat_of_ur.jpg",
+                image: "assets/images/landmarks/great-ziggurat-of-ur.png",
+                transparentImage: true,
                 top: "35%",
-                left: "60%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#38bdf8",
-                border: "rgba(56, 189, 248, 0.35)"
+                left: "60%"
             }, {
                 id: 3,
                 name: "Parthenon",
@@ -226,12 +86,10 @@
                 architect: "Ictinus & Callicrates",
                 description: "A former temple on the Athenian Acropolis dedicated to the goddess Athena, regarded as the pinnacle of the Doric order.",
                 facts: ["Designed with subtle optical illusions so columns appear straight", "Built primarily from white Pentelic marble"],
-                image: "assets/images/landmarks/parthenon.jpg",
+                image: "assets/images/landmarks/parthenon.png",
+                transparentImage: true,
                 top: "32%",
-                left: "54%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "54%"
             }, {
                 id: 4,
                 name: "Colosseum",
@@ -241,12 +99,10 @@
                 architect: "Emperors Vespasian & Titus",
                 description: "An elliptical amphitheatre in the center of Rome and the largest ancient amphitheatre ever built.",
                 facts: ["Held between 50,000 and 80,000 spectators", "Featured an underground hypogeum network of tunnels and cages"],
-                image: "assets/images/landmarks/colosseum.jpg",
+                image: "assets/images/landmarks/colosseum.png",
+                transparentImage: true,
                 top: "30%",
-                left: "51%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#38bdf8",
-                border: "rgba(56, 189, 248, 0.35)"
+                left: "51%"
             }, {
                 id: 5,
                 name: "Hagia Sophia",
@@ -256,12 +112,10 @@
                 architect: "Anthemius of Tralles & Isidore of Miletus",
                 description: "A monumental place of worship famous for its massive pendentive dome that changed the history of world architecture.",
                 facts: ["Served as a cathedral, imperial mosque, and museum across 1,500 years", "Its central dome is 32 meters in diameter with 40 arched windows"],
-                image: "assets/images/landmarks/hagia_sophia.jpg",
+                image: "assets/images/landmarks/hagia-sophia.png",
+                transparentImage: true,
                 top: "30%",
-                left: "56%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "56%"
             }, {
                 id: 6,
                 name: "Notre-Dame de Paris",
@@ -271,12 +125,10 @@
                 architect: "Maurice de Sully",
                 description: "A medieval Catholic cathedral on the Île de la Cité, celebrated for its pioneering use of the rib vault and flying buttresses.",
                 facts: ["Features three iconic 13th-century stained-glass rose windows", "Restored and reopened following the historic 2019 roof fire"],
-                image: "assets/images/landmarks/notre_dame.jpg",
+                image: "assets/images/landmarks/notre-dame-de-paris.png",
+                transparentImage: true,
                 top: "25%",
-                left: "49%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#38bdf8",
-                border: "rgba(56, 189, 248, 0.35)"
+                left: "49%"
             }, {
                 id: 7,
                 name: "St. Basil's Cathedral",
@@ -286,12 +138,10 @@
                 architect: "Postnik Yakovlev",
                 description: "An Orthodox church in Red Square shaped like the flame of a bonfire rising into the sky, famous for its vivid onion domes.",
                 facts: ["Composed of nine individual chapels built around a central core", "Commissioned by Ivan the Terrible to commemorate the capture of Kazan"],
-                image: "assets/images/landmarks/st_basils.jpg",
+                image: "assets/images/landmarks/st-basil-s-cathedral.png",
+                transparentImage: true,
                 top: "20%",
-                left: "58%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "58%"
             }, {
                 id: 8,
                 name: "Taj Mahal",
@@ -301,12 +151,10 @@
                 architect: "Ustad Ahmad Lahauri",
                 description: "An ivory-white marble mausoleum on the right bank of the river Yamuna, blending Indian, Persian, and Islamic architectural styles.",
                 facts: ["Four minarets tilt slightly outward to protect the tomb in an earthquake", "Inlaid with semi-precious stones in intricate floral patterns"],
-                image: "assets/images/landmarks/taj_mahal.jpg",
+                image: "assets/images/landmarks/taj-mahal.png",
+                transparentImage: true,
                 top: "40%",
-                left: "70%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#38bdf8",
-                border: "rgba(56, 189, 248, 0.35)"
+                left: "70%"
             }, {
                 id: 9,
                 name: "Sagrada Família",
@@ -316,12 +164,10 @@
                 architect: "Antoni Gaudí",
                 description: "The largest unfinished Catholic church in the world, combining Gothic and curvilinear Art Nouveau forms inspired by nature.",
                 facts: ["Interior columns branch out like trees to support the vaulting", "Under construction for more than 140 years"],
-                image: "assets/images/landmarks/sagrada_familia.jpg",
+                image: "assets/images/landmarks/sagrada-fam-lia.png",
+                transparentImage: true,
                 top: "31%",
-                left: "47%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "47%"
             }, {
                 id: 10,
                 name: "Eiffel Tower",
@@ -331,12 +177,10 @@
                 architect: "Gustave Eiffel & Stephen Sauvestre",
                 description: "A wrought-iron lattice tower on the Champ de Mars built as the centerpiece of the 1889 World's Fair.",
                 facts: ["Assembled from 18,038 puddle iron parts joined by 2.5 million rivets", "Grows up to 15 cm taller during summer due to thermal expansion"],
-                image: "assets/images/landmarks/eiffel_tower.jpg",
+                image: "assets/images/landmarks/eiffel-tower.png",
+                transparentImage: true,
                 top: "27%",
-                left: "48%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#38bdf8",
-                border: "rgba(56, 189, 248, 0.35)"
+                left: "48%"
             }, {
                 id: 11,
                 name: "Fallingwater",
@@ -346,12 +190,10 @@
                 architect: "Frank Lloyd Wright",
                 description: "A famous residence built partly over a waterfall on Bear Run, seamlessly integrating human shelter with the natural landscape.",
                 facts: ["Uses dramatic cantilevered reinforced concrete terraces", "Local Pottsville sandstone was quarried directly on site"],
-                image: "assets/images/landmarks/fallingwater.jpg",
+                image: "assets/images/landmarks/fallingwater.png",
+                transparentImage: true,
                 top: "30%",
-                left: "26%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "26%"
             }, {
                 id: 12,
                 name: "Sydney Opera House",
@@ -361,12 +203,10 @@
                 architect: "Jørn Utzon",
                 description: "A multi-venue performing arts centre defined by its soaring interlocking precast concrete shells.",
                 facts: ["Roof shells are covered with over 1 million Swedish ceramic tiles", "Cooled using seawater pumped directly from Sydney Harbour"],
-                image: "assets/images/landmarks/sydney_opera_house.jpg",
+                image: "assets/images/landmarks/sydney-opera-house.png",
+                transparentImage: true,
                 top: "76%",
-                left: "88%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#38bdf8",
-                border: "rgba(56, 189, 248, 0.35)"
+                left: "88%"
             }, {
                 id: 13,
                 name: "Angel of the North",
@@ -376,12 +216,10 @@
                 architect: "Antony Gormley",
                 description: "A massive contemporary steel sculpture standing on a hilltop in Northeast England, honoring the region's coal mining history.",
                 facts: ["Wingspan measures 54 meters—wider than a Boeing 757", "Built from COR-TEN weather-resistant steel to withstand 100 mph winds"],
-                image: "assets/images/landmarks/angel_of_the_north.jpg",
+                image: "assets/images/landmarks/angel-of-the-north.png",
+                transparentImage: true,
                 top: "23%",
-                left: "47%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "47%"
             }, {
                 id: 14,
                 name: "Walt Disney Concert Hall",
@@ -391,12 +229,10 @@
                 architect: "Frank Gehry",
                 description: "A landmark concert hall encased in sweeping, undulating stainless-steel sails designed to evoke musical movement.",
                 facts: ["Auditorium interior is paneled in Douglas fir for world-class acoustics", "Exterior steel panels were lightly sanded to reduce blinding glare"],
-                image: "assets/images/landmarks/disney_concert_hall.jpg",
+                image: "assets/images/landmarks/walt-disney-concert-hall.png",
+                transparentImage: true,
                 top: "34%",
-                left: "17%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#38bdf8",
-                border: "rgba(56, 189, 248, 0.35)"
+                left: "17%"
             }, {
                 id: 15,
                 name: "Burj Khalifa",
@@ -406,12 +242,10 @@
                 architect: "Adrian Smith (SOM)",
                 description: "A megatall skyscraper in Dubai standing at 828 meters, making it the tallest structure and building in the world.",
                 facts: ["Uses a buttressed Y-shaped floor plan inspired by the Hymenocallis flower", "Features 163 habitable floors and the world's fastest double-deck elevators"],
-                image: "assets/images/landmarks/burj_khalifa.jpg",
+                image: "assets/images/landmarks/burj-khalifa.png",
+                transparentImage: true,
                 top: "40%",
-                left: "63%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "63%"
             }, {
                 id: 16,
                 name: "Heydar Aliyev Center",
@@ -421,12 +255,10 @@
                 architect: "Zaha Hadid",
                 description: "A cultural complex renowned for its fluid, wave-like skin that folds continuously from the surrounding plaza into the building.",
                 facts: ["Designed with virtually no sharp angles or straight lines", "Clad in over 12,000 individually molded fiberglass-reinforced panels"],
-                image: "assets/images/landmarks/heydar_aliyev.jpg",
+                image: "assets/images/landmarks/heydar-aliyev-center.png",
+                transparentImage: true,
                 top: "31%",
-                left: "62%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#38bdf8",
-                border: "rgba(56, 189, 248, 0.35)"
+                left: "62%"
             }, {
                 id: 17,
                 name: "The Kelpies",
@@ -436,78 +268,261 @@
                 architect: "Andy Scott",
                 description: "A pair of 30-meter-high horse-head sculptures celebrating Scotland's horse-powered industrial and canal heritage.",
                 facts: ["Each head weighs 300 tonnes and is clad in 464 stainless steel plates", "Inspired by mythological shape-shifting water spirits of Scottish folklore"],
-                image: "assets/images/landmarks/the_kelpies.jpg",
+                image: "assets/images/landmarks/the-kelpies.png",
+                transparentImage: true,
                 top: "20%",
-                left: "46%",
-                bg: "rgba(15, 23, 42, 0.45)",
-                color: "#34d399",
-                border: "rgba(16, 185, 129, 0.35)"
+                left: "46%"
+            }, {
+                id: 18,
+                name: "Christ the Redeemer",
+                country: "Rio de Janeiro, Brazil",
+                era: "Modern (1931)",
+                style: "Art Deco",
+                architect: "Heitor da Silva Costa",
+                description: "A monumental statue of Jesus Christ overlooking Rio de Janeiro from the summit of Mount Corcovado.",
+                facts: ["Stands 30 meters tall, not including its 8-meter pedestal", "Designed by Heitor da Silva Costa with sculptural work by Paul Landowski"],
+                image: "assets/images/landmarks/christ-the-redeemer.png",
+                transparentImage: false,
+                top: "61%",
+                left: "34%"
+            }, {
+                id: 19,
+                name: "Great Wall of China",
+                country: "Northern China",
+                era: "Ancient (7th century BC onward)",
+                style: "Military Fortification",
+                architect: "Built by successive Chinese states and dynasties",
+                description: "A vast system of walls, passes, and fortifications built and rebuilt across centuries to defend China's northern frontier.",
+                facts: ["The best-known surviving sections largely date from the Ming dynasty", "The wall's branches and associated defenses extend for tens of thousands of kilometers"],
+                image: "assets/images/landmarks/great-wall-of-china.png",
+                transparentImage: false,
+                top: "34%",
+                left: "79%"
             }
         ];
 
         var mapPins = document.getElementById("map-pins");
-        var parent = document.getElementById("parent");
-        var modals = document.getElementById("modals");
+        var mapBox = document.getElementById("world-map");
+        var heroEyebrow = document.querySelector(".hero-eyebrow");
+        var heroTitle = document.querySelector(".hero-title");
+        var heroSubtitle = document.querySelector(".hero-subtitle");
+        var themeToggle = document.getElementById("theme-toggle");
+        var preview = document.getElementById("landmark-preview");
+        var activePin = null;
+        var hidePreviewTimer;
+        var detailOverlay = document.getElementById("detail-overlay");
+        var zoomScene = document.getElementById("zoom-scene");
+        var zoomMarker = document.getElementById("zoom-marker");
+        var detailClose = document.getElementById("detail-close");
+        var detailContent = document.getElementById("detail-content");
+        var selectedPin = null;
+
+        function escapeHTML(value) {
+            return String(value).replace(/[&<>"']/g, function (character) {
+                return {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    "\"": "&quot;",
+                    "'": "&#39;"
+                }[character];
+            });
+        }
+
+        themeToggle.addEventListener("click", function () {
+            var isDark = document.body.dataset.theme !== "dark";
+            document.body.dataset.theme = isDark ? "dark" : "light";
+            themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+            themeToggle.setAttribute("aria-pressed", String(isDark));
+        });
+
+        mapBox.addEventListener("pointermove", function (event) {
+            if (event.pointerType !== "mouse" && event.pointerType !== "pen") return;
+
+            var isOverText = [heroEyebrow, heroTitle, heroSubtitle].some(function (element) {
+                var rect = element.getBoundingClientRect();
+                return event.clientX >= rect.left && event.clientX <= rect.right
+                    && event.clientY >= rect.top && event.clientY <= rect.bottom;
+            });
+            heroEyebrow.style.opacity = isOverText ? "0" : "1";
+            heroTitle.style.opacity = isOverText ? "0" : "1";
+            heroSubtitle.style.opacity = isOverText ? "0" : "1";
+        });
+
+        mapBox.addEventListener("pointerleave", function () {
+            heroEyebrow.style.opacity = "1";
+            heroTitle.style.opacity = "1";
+            heroSubtitle.style.opacity = "1";
+        });
+
+        function positionPreview() {
+            if (!activePin) return;
+
+            var canvas = document.querySelector(".map-canvas");
+            var canvasRect = canvas.getBoundingClientRect();
+            var pinRect = activePin.getBoundingClientRect();
+            var previewRect = preview.getBoundingClientRect();
+            var pinX = pinRect.left + pinRect.width / 2 - canvasRect.left;
+            var pinY = pinRect.top + pinRect.height / 2 - canvasRect.top;
+            var isMobile = window.matchMedia("(max-width: 576px)").matches;
+            var visibleLeft = (isMobile ? mapBox.scrollLeft : 0) + previewRect.width / 2 + 12;
+            var visibleRight = (isMobile ? mapBox.scrollLeft + mapBox.clientWidth : canvasRect.width)
+                - previewRect.width / 2 - 12;
+            var left = pinX;
+            var top = pinY;
+
+            left = Math.max(visibleLeft, Math.min(left, visibleRight));
+            top = Math.max(12, Math.min(top, canvasRect.height - previewRect.height - 12));
+            preview.style.left = left + "px";
+            preview.style.top = top + "px";
+        }
+
+        function showPreview(landmark, pin) {
+            if (activePin && activePin !== pin) activePin.setAttribute("aria-expanded", "false");
+            activePin = pin;
+            preview.textContent = landmark.name;
+            preview.dataset.visible = "true";
+            preview.setAttribute("aria-hidden", "false");
+            pin.setAttribute("aria-expanded", "true");
+            positionPreview();
+        }
+
+        function closePreview() {
+            if (activePin) activePin.setAttribute("aria-expanded", "false");
+            activePin = null;
+            preview.dataset.visible = "false";
+            preview.setAttribute("aria-hidden", "true");
+        }
+
+        function openDetail(landmark, pin) {
+            window.clearTimeout(hidePreviewTimer);
+            closePreview();
+            selectedPin = pin;
+            selectedPin.setAttribute("aria-expanded", "true");
+            document.body.dataset.detailOpen = "true";
+
+            detailContent.innerHTML = `
+                <img class="detail-image" data-cutout="${escapeHTML(Boolean(landmark.transparentImage))}"
+                    data-landmark-id="${escapeHTML(landmark.id)}" src="${escapeHTML(landmark.image)}"
+                    alt="${escapeHTML(landmark.name)}">
+                <div class="detail-copy">
+                    <p class="detail-eyebrow">${escapeHTML(landmark.era)} · ${escapeHTML(landmark.style)}</p>
+                    <h2 class="detail-title" id="detail-title">${escapeHTML(landmark.name)}</h2>
+                    <p class="detail-location">${escapeHTML(landmark.country)}</p>
+                    <p class="detail-description">${escapeHTML(landmark.description)}</p>
+                    <p class="detail-architect"><strong>Architect:</strong> ${escapeHTML(landmark.architect)}</p>
+                    <h3 class="detail-facts-title">Structural highlights</h3>
+                    <ul class="detail-facts">${landmark.facts.map(function (fact) {
+                        return `<li>${escapeHTML(fact)}</li>`;
+                    }).join("")}</ul>
+                </div>
+            `;
+
+            var detailImage = detailContent.querySelector(".detail-image");
+            detailImage.addEventListener("error", function () {
+                detailImage.alt = landmark.name + " image unavailable";
+            });
+
+            var scale = window.innerWidth < 576 ? 3.2 : 2.7;
+            var pinX = window.innerWidth * parseFloat(landmark.left) / 100;
+            var pinY = window.innerHeight * (parseFloat(landmark.top) + 2) / 100;
+            zoomMarker.textContent = landmark.id;
+            zoomMarker.style.setProperty("--pin-x", landmark.left);
+            zoomMarker.style.setProperty("--pin-y", "calc(" + landmark.top + " + 2%)");
+            zoomScene.style.setProperty("--zoom-scale", scale);
+            zoomScene.style.setProperty("--zoom-x", (window.innerWidth / 2 - scale * pinX) + "px");
+            zoomScene.style.setProperty("--zoom-y", (window.innerHeight / 2 - scale * pinY) + "px");
+            detailOverlay.setAttribute("aria-hidden", "false");
+            detailOverlay.dataset.open = "true";
+            detailOverlay.dataset.zoomed = "false";
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    detailOverlay.dataset.zoomed = "true";
+                });
+            });
+            detailClose.focus();
+        }
+
+        function closeDetail() {
+            if (detailOverlay.dataset.open !== "true") return;
+            detailOverlay.dataset.zoomed = "false";
+            detailOverlay.dataset.open = "false";
+            detailOverlay.setAttribute("aria-hidden", "true");
+            delete document.body.dataset.detailOpen;
+            if (selectedPin) {
+                selectedPin.setAttribute("aria-expanded", "false");
+                selectedPin.focus();
+                selectedPin = null;
+            }
+        }
+
+        function schedulePreviewClose() {
+            window.clearTimeout(hidePreviewTimer);
+            hidePreviewTimer = window.setTimeout(function () {
+                closePreview();
+            }, 180);
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                closeDetail();
+                closePreview();
+            } else if (event.key === "Tab" && detailOverlay.dataset.open === "true") {
+                var focusable = detailOverlay.querySelectorAll("button, a[href]");
+                var first = focusable[0];
+                var last = focusable[focusable.length - 1];
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+
+        window.addEventListener("resize", positionPreview);
+        mapBox.addEventListener("scroll", positionPreview);
+        detailClose.addEventListener("click", closeDetail);
+        detailOverlay.addEventListener("click", function (event) {
+            if (event.target === detailOverlay) closeDetail();
+        });
 
         for (var i = 0; i < landmarks.length; i++) {
+            (function (landmark) {
+                var pin = document.createElement("button");
+                pin.className = "pin";
+                pin.type = "button";
+                pin.textContent = landmark.id;
+                pin.title = landmark.name;
+                pin.setAttribute("aria-label", "Explore " + landmark.name);
+                pin.setAttribute("aria-expanded", "false");
+                pin.dataset.landmarkId = landmark.id;
+                pin.style.top = "calc(" + landmark.top + " + 2%)";
+                pin.style.left = landmark.left;
 
-            var factList = "";
-            for (var j = 0; j < landmarks[i].facts.length; j++) {
-                factList += `<li class="mb-1 text-light opacity-75">▹ ` + landmarks[i].facts[j] + `</li>`;
-            }
+                pin.addEventListener("pointerenter", function (event) {
+                    if (event.pointerType === "mouse") {
+                        window.clearTimeout(hidePreviewTimer);
+                        showPreview(landmark, pin);
+                    }
+                });
 
-            // 1. Add Glowing Tech Beacon Pin to the World Map
-            mapPins.innerHTML += `
-        <button class="pin" data-bs-toggle="modal" data-bs-target="#modal` + landmarks[i].id + `"
-          title="` + landmarks[i].name + `"
-          style="top: ` + landmarks[i].top + `; left: ` + landmarks[i].left + `;">
-          ` + landmarks[i].id + `
-        </button>
-      `;
+                pin.addEventListener("pointerleave", schedulePreviewClose);
 
-            // 2. Add Glassmorphic Card to the Grid
-            parent.innerHTML += `
-        <div class="col-12 col-sm-6 col-lg-4">
-          <div class="card p-3 h-100" data-bs-toggle="modal" data-bs-target="#modal` + landmarks[i].id + `">
-            <img src="` + landmarks[i].image + `" class="img-fluid" alt="` + landmarks[i].name + `">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <span class="badge tech-badge">` + landmarks[i].era + `</span>
-              <span class="text-secondary small font-monospace">ID #0` + landmarks[i].id + `</span>
-            </div>
-            <h5 class="fw-bold text-white mb-2">` + landmarks[i].name + `</h5>
-            <p class="mb-1 small"><span class="tech-label">Location:</span> ` + landmarks[i].country + `</p>
-            <p class="mb-0 small"><span class="tech-label">Style:</span> <span style="color: ` + landmarks[i].color + `;">` + landmarks[i].style + `</span></p>
-          </div>
-        </div>
-      `;
+                pin.addEventListener("focus", function () {
+                    window.clearTimeout(hidePreviewTimer);
+                    showPreview(landmark, pin);
+                });
 
-            // 3. Add Matching Glassmorphism Modal
-            modals.innerHTML += `
-        <div class="modal fade" id="modal` + landmarks[i].id + `" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-white p-3">
-              <div class="modal-header border-0 pb-1">
-                <div>
-                  <span class="badge tech-badge mb-1">` + landmarks[i].era + `</span>
-                  <h5 class="modal-title fw-bold text-white">` + landmarks[i].id + ". " + landmarks[i].name + `</h5>
-                </div>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body pt-2">
-                <img src="` + landmarks[i].image + `" class="modal-img" alt="` + landmarks[i].name + `">
-                <p class="small text-secondary mb-3">` + landmarks[i].description + `</p>
-                <div class="p-3 rounded-3 mb-3" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07);">
-                  <p class="mb-1 small"><span class="tech-label">Location:</span> ` + landmarks[i].country + `</p>
-                  <p class="mb-1 small"><span class="tech-label">Style:</span> <span style="color: ` + landmarks[i].color + `;">` + landmarks[i].style + `</span></p>
-                  <p class="mb-0 small"><span class="tech-label">Architect:</span> ` + landmarks[i].architect + `</p>
-                </div>
-                <p class="tech-label mb-1">Structural Highlights</p>
-                <ul class="list-unstyled small mb-0">` + factList + `</ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
+                pin.addEventListener("blur", schedulePreviewClose);
+
+                pin.addEventListener("click", function () {
+                    openDetail(landmark, pin);
+                });
+
+                mapPins.appendChild(pin);
+            })(landmarks[i]);
         }
     </script>
 
