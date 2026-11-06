@@ -71,6 +71,53 @@
             background: transparent;
         }
 
+        .showcase-nav {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            display: grid;
+            width: clamp(44px, 5vw, 58px);
+            height: clamp(44px, 5vw, 58px);
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.68);
+            border-radius: 50%;
+            color: #465544;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.28));
+            box-shadow: 0 8px 26px rgba(43, 53, 40, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(18px) saturate(155%);
+            -webkit-backdrop-filter: blur(18px) saturate(155%);
+            font-size: 1.5rem;
+            line-height: 1;
+            text-decoration: none;
+            transform: translateY(-50%);
+            transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .showcase-nav:hover,
+        .showcase-nav:focus-visible {
+            color: #344432;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.52));
+            box-shadow: 0 10px 30px rgba(43, 53, 40, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+        }
+
+        .showcase-nav:focus-visible {
+            outline: 3px solid rgba(116, 138, 112, 0.5);
+            outline-offset: 3px;
+        }
+
+        .showcase-nav.previous {
+            left: clamp(0.75rem, 3vw, 2.5rem);
+        }
+
+        .showcase-nav.next {
+            right: clamp(0.75rem, 3vw, 2.5rem);
+        }
+
+        .showcase-nav[aria-disabled="true"] {
+            opacity: 0.42;
+            pointer-events: none;
+        }
+
         .info-panel {
             min-height: 50vh;
             background: #fff;
@@ -148,39 +195,221 @@
             transition: width 0.5s ease;
         }
 
-        .roster-btn {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 0.55rem;
-            padding: 0.75rem 1rem;
-            border: 1px solid transparent;
+        .entry-description {
+            color: #62675f;
+            font-size: 0.98rem;
+            line-height: 1.8;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .detail-item {
+            min-width: 0;
+            padding: 0.9rem 1rem;
+            border: 1px solid #eeece6;
             border-radius: 14px;
-            color: #51564e;
-            background: #f7f7f3;
-            font-size: 0.9rem;
+            background: #fbfbf9;
+        }
+
+        .detail-value {
+            margin-top: 0.25rem;
+            color: #424740;
+            font-size: 0.92rem;
             font-weight: 650;
-            text-align: left;
             text-transform: capitalize;
-            transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+            overflow-wrap: anywhere;
         }
 
-        .roster-btn:hover {
-            transform: translateX(3px);
-            background: #edf1e9;
+        .matchup-grid {
+            display: grid;
+            gap: 0.85rem;
         }
 
-        .roster-btn.active {
-            border-color: #dfe7db;
-            color: #465c43;
-            background: #eaf0e7;
+        .matchup-card {
+            min-width: 0;
+            padding: 1rem;
+            border: 1px solid #eeece6;
+            border-radius: 16px;
+            background: #fbfbf9;
         }
 
-        .roster-number {
-            color: #9a9d94;
+        .matchup-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+
+        .matchup-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.38rem 0.62rem;
+            border-radius: 999px;
             font-size: 0.72rem;
+            font-weight: 750;
+            text-transform: capitalize;
+        }
+
+        .matchup-multiplier {
+            padding: 0.12rem 0.36rem;
+            border-radius: 999px;
+            color: #424740;
+            background: rgba(255, 255, 255, 0.72);
+            font-size: 0.66rem;
             font-variant-numeric: tabular-nums;
+        }
+
+        .matchup-empty,
+        .matchup-status {
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .evolution-list {
+            display: flex;
+            align-items: center;
+            min-width: max-content;
+            padding: 0.5rem 0.25rem 0.75rem;
+        }
+
+        .evolution-branches {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .evolution-branch {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        .evolution-connector {
+            color: #a0a79b;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .evolution-pokemon {
+            display: flex;
+            width: 112px;
+            min-height: 126px;
+            flex: 0 0 112px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.65rem;
+            border: 1px solid #e8ebe4;
+            border-radius: 16px;
+            color: #424740;
+            background: #fbfbf9;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+
+        .evolution-pokemon:hover,
+        .evolution-pokemon:focus-visible {
+            transform: translateY(-2px);
+            border-color: #cbd8c7;
+            color: #394b37;
+            box-shadow: 0 6px 16px rgba(54, 68, 51, 0.1);
+        }
+
+        .evolution-pokemon img {
+            width: 76px;
+            height: 76px;
+            object-fit: contain;
+        }
+
+        .evolution-pokemon span {
+            margin-top: 0.3rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .evolution-current {
+            border-color: #cbd8c7;
+            background: #f0f5ed;
+        }
+
+        .evolution-flow {
+            max-width: 100%;
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            scrollbar-color: #cbd6c7 transparent;
+            scrollbar-width: thin;
+        }
+
+        .evolution-orbit {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 1;
+            margin: 0 auto;
+        }
+
+        .evolution-orbit-lines {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            pointer-events: none;
+        }
+
+        .evolution-orbit-lines line {
+            stroke: #dce4d8;
+            stroke-width: 0.45;
+            stroke-dasharray: 1.4 1.2;
+        }
+
+        .evolution-orbit .evolution-pokemon {
+            position: absolute;
+            z-index: 1;
+            width: 92px;
+            min-height: 100px;
+            padding: 0.45rem;
+            transform: translate(-50%, -50%);
+        }
+
+        .evolution-orbit .evolution-pokemon img {
+            width: 58px;
+            height: 58px;
+        }
+
+        .evolution-orbit .evolution-center {
+            z-index: 2;
+            width: 102px;
+            min-height: 110px;
+            border-color: #cbd8c7;
+            background: #f0f5ed;
+            box-shadow: 0 5px 16px rgba(54, 68, 51, 0.1);
+        }
+
+        .evolution-orbit .evolution-center img {
+            width: 66px;
+            height: 66px;
+        }
+
+        .evolution-name {
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            color: #526b55;
+            background: #edf4ec;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .species-note {
+            color: var(--muted);
+            font-size: 0.8rem;
         }
 
         .loader-state {
@@ -227,10 +456,18 @@
         <div class="row g-0">
             <section id="showcaseContainer" class="col-12 col-lg-8 showcase-container"
                 aria-label="Interactive 3D Pokémon showcase">
+                <a id="previousPokemon" class="showcase-nav previous" href="view.html?id=1"
+                    aria-label="Previous Pokémon" title="Previous Pokémon" hidden>
+                    <span aria-hidden="true">‹</span>
+                </a>
                 <model-viewer id="mainModel" class="showcase-model" src="" alt="Pokémon 3D model"
                     camera-controls auto-rotate shadow-intensity="0.5" shadow-softness="1" exposure="1"
                     disable-zoom>
                 </model-viewer>
+                <a id="nextPokemon" class="showcase-nav next" href="view.html?id=2"
+                    aria-label="Next Pokémon" title="Next Pokémon" hidden>
+                    <span aria-hidden="true">›</span>
+                </a>
             </section>
 
             <section class="col-12 col-lg-4 info-panel p-4 p-xl-5">
@@ -257,6 +494,23 @@
                     </div>
                     <div id="pokeTypes" class="mb-5" aria-label="Pokémon types"></div>
 
+                    <h2 class="eyebrow mb-3">About this Pokémon</h2>
+                    <p id="pokeDescription" class="entry-description mb-3"></p>
+                    <p class="mb-5"><span id="pokeGenus" class="badge rounded-pill px-3 py-2"
+                        style="background: #edf4ec; color: #526b55;"></span></p>
+
+                    <h2 class="eyebrow mb-3">At a glance</h2>
+                    <div class="detail-grid mb-5">
+                        <div class="detail-item"><span class="eyebrow">Height</span><div class="detail-value" id="pokeHeight"></div></div>
+                        <div class="detail-item"><span class="eyebrow">Weight</span><div class="detail-value" id="pokeWeight"></div></div>
+                        <div class="detail-item"><span class="eyebrow">Abilities</span><div class="detail-value" id="pokeAbilities"></div></div>
+                        <div class="detail-item"><span class="eyebrow">Base experience</span><div class="detail-value" id="pokeExperience"></div></div>
+                        <div class="detail-item"><span class="eyebrow">Habitat</span><div class="detail-value" id="pokeHabitat"></div></div>
+                        <div class="detail-item"><span class="eyebrow">Growth rate</span><div class="detail-value" id="pokeGrowthRate"></div></div>
+                        <div class="detail-item"><span class="eyebrow">Egg groups</span><div class="detail-value" id="pokeEggGroups"></div></div>
+                        <div class="detail-item"><span class="eyebrow">Capture rate</span><div class="detail-value" id="pokeCaptureRate"></div></div>
+                    </div>
+
                     <h2 class="eyebrow mb-4">Base statistics</h2>
                     <div class="stat-row">
                         <div class="d-flex justify-content-between mb-2">
@@ -276,18 +530,45 @@
                         </div>
                         <div class="stat-track"><div class="stat-bar" id="barDefense"></div></div>
                     </div>
-
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h2 class="eyebrow mb-0">Featured collection</h2>
+                    <div class="mb-5">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="stat-name">SPECIAL ATTACK</span><span class="stat-value" id="statSpecialAttack"></span>
+                        </div>
+                        <div class="stat-track"><div class="stat-bar" id="barSpecialAttack"></div></div>
                     </div>
-                    <div id="rosterList" aria-label="Featured Pokémon"></div>
+                    <div class="stat-row mb-5">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="stat-name">SPECIAL DEFENSE</span><span class="stat-value" id="statSpecialDefense"></span>
+                        </div>
+                        <div class="stat-track"><div class="stat-bar" id="barSpecialDefense"></div></div>
+                    </div>
+                    <div class="stat-row mb-5">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="stat-name">SPEED</span><span class="stat-value" id="statSpeed"></span>
+                        </div>
+                        <div class="stat-track"><div class="stat-bar" id="barSpeed"></div></div>
+                    </div>
+
+                    <section class="mb-5" aria-labelledby="matchupsHeading">
+                        <h2 id="matchupsHeading" class="eyebrow mb-3">Type defenses &amp; strengths</h2>
+                        <div id="typeMatchups" class="matchup-grid" aria-live="polite">
+                            <p class="matchup-status mb-0">Calculating type matchups…</p>
+                        </div>
+                    </section>
+
+                    <section aria-labelledby="evolutionHeading">
+                        <h2 id="evolutionHeading" class="eyebrow mb-3">Evolution line</h2>
+                        <div class="evolution-flow" aria-label="Evolution stages; scroll horizontally to explore">
+                            <div id="evolutionLine" class="evolution-list"></div>
+                        </div>
+                        <p id="speciesNote" class="species-note mt-3 mb-0" hidden></p>
+                    </section>
                 </div>
             </section>
         </div>
     </main>
 
     <script>
-        const featuredIds = [1, 4, 7, 25, 94, 150];
         const typeThemes = {
             normal: { bg: '#f0eee8', pill: '#e9e6db', text: '#5d5a50' },
             fire: { bg: '#fbe9e2', pill: '#f6d5c7', text: '#945441' },
@@ -308,11 +589,12 @@
             steel: { bg: '#eceef0', pill: '#dfe3e7', text: '#5e6872' },
             fairy: { bg: '#f7e9f0', pill: '#f1d8e5', text: '#895b73' }
         };
-        const pokemonCache = new Map();
         const loader = document.getElementById('loader');
         const content = document.getElementById('content');
         const errorState = document.getElementById('errorState');
         const modelViewer = document.getElementById('mainModel');
+        const previousPokemonLink = document.getElementById('previousPokemon');
+        const nextPokemonLink = document.getElementById('nextPokemon');
         const requestedPokemon = new URLSearchParams(window.location.search).get('id') || '1';
 
         async function fetchPokemon(idOrName) {
@@ -325,9 +607,137 @@
             return response.json();
         }
 
+        async function fetchSpecies(id) {
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+            if (!response.ok) {
+                throw new Error('Pokémon species information is currently unavailable.');
+            }
+            return response.json();
+        }
+
+        async function fetchType(typeName) {
+            const response = await fetch(`https://pokeapi.co/api/v2/type/${encodeURIComponent(typeName)}`);
+            if (!response.ok) {
+                throw new Error(`Type matchup information for ${typeName} is unavailable.`);
+            }
+            return response.json();
+        }
+
         function setStat(stat, value) {
-            document.getElementById(`stat${stat}`).textContent = value;
+            document.getElementById(`stat${stat}`).textContent = value ?? '—';
             document.getElementById(`bar${stat}`).style.width = `${Math.min(value / 255 * 100, 100)}%`;
+        }
+
+        function formatLabel(value) {
+            return value ? value.replaceAll('-', ' ') : 'Unknown';
+        }
+
+        function createMatchupBadge(typeName, multiplier = null) {
+            const theme = typeThemes[typeName] || typeThemes.normal;
+            const badge = document.createElement('span');
+            badge.className = 'matchup-type';
+            badge.style.backgroundColor = theme.pill;
+            badge.style.color = theme.text;
+
+            const name = document.createElement('span');
+            name.textContent = typeName;
+            badge.append(name);
+            if (multiplier !== null) {
+                const value = document.createElement('span');
+                value.className = 'matchup-multiplier';
+                value.textContent = `${multiplier}×`;
+                badge.append(value);
+            }
+            return badge;
+        }
+
+        function createMatchupGroup(title, types, multiplierForType) {
+            const card = document.createElement('div');
+            card.className = 'matchup-card';
+            const heading = document.createElement('h3');
+            heading.className = 'eyebrow mb-3';
+            heading.textContent = title;
+            card.append(heading);
+
+            if (!types.length) {
+                const empty = document.createElement('p');
+                empty.className = 'matchup-empty mb-0';
+                empty.textContent = 'None';
+                card.append(empty);
+                return card;
+            }
+
+            const badges = document.createElement('div');
+            badges.className = 'matchup-types';
+            types.forEach(typeName => badges.append(createMatchupBadge(typeName, multiplierForType(typeName))));
+            card.append(badges);
+            return card;
+        }
+
+        async function renderTypeMatchups(pokemon) {
+            const container = document.getElementById('typeMatchups');
+            try {
+                const pokemonTypes = pokemon.types.map(({ type }) => type.name);
+                const typeData = await Promise.all(pokemonTypes.map(fetchType));
+                const allTypeNames = Object.keys(typeThemes);
+                const incomingMultipliers = new Map(allTypeNames.map(typeName => [typeName, 1]));
+
+                typeData.forEach(({ damage_relations: relations }) => {
+                    relations.double_damage_from.forEach(({ name }) => {
+                        incomingMultipliers.set(name, (incomingMultipliers.get(name) ?? 1) * 2);
+                    });
+                    relations.half_damage_from.forEach(({ name }) => {
+                        incomingMultipliers.set(name, (incomingMultipliers.get(name) ?? 1) * 0.5);
+                    });
+                    relations.no_damage_from.forEach(({ name }) => {
+                        incomingMultipliers.set(name, 0);
+                    });
+                });
+
+                const typeNamesFor = predicate => allTypeNames.filter(typeName => predicate(incomingMultipliers.get(typeName)));
+                const groups = [
+                    createMatchupGroup('Weaknesses', typeNamesFor(multiplier => multiplier > 1), typeName => incomingMultipliers.get(typeName)),
+                    createMatchupGroup('Resistances', typeNamesFor(multiplier => multiplier > 0 && multiplier < 1), typeName => incomingMultipliers.get(typeName)),
+                    createMatchupGroup('Immunities', typeNamesFor(multiplier => multiplier === 0), () => 0)
+                ];
+
+                const strengths = document.createElement('div');
+                strengths.className = 'matchup-card';
+                const strengthsHeading = document.createElement('h3');
+                strengthsHeading.className = 'eyebrow mb-3';
+                strengthsHeading.textContent = 'Strengths';
+                strengths.append(strengthsHeading);
+
+                typeData.forEach(({ name, damage_relations: relations }) => {
+                    const row = document.createElement('div');
+                    row.className = 'mb-3';
+                    const attackType = document.createElement('div');
+                    attackType.className = 'matchup-types mb-2';
+                    attackType.append(createMatchupBadge(name));
+
+                    const effectiveTypes = relations.double_damage_to.map(({ name: targetType }) => targetType);
+                    if (effectiveTypes.length) {
+                        const targets = document.createElement('div');
+                        targets.className = 'matchup-types';
+                        effectiveTypes.forEach(targetType => targets.append(createMatchupBadge(targetType, 2)));
+                        row.append(attackType, targets);
+                    } else {
+                        const empty = document.createElement('p');
+                        empty.className = 'matchup-empty mb-0';
+                        empty.textContent = 'No super-effective matchups.';
+                        row.append(attackType, empty);
+                    }
+                    strengths.append(row);
+                });
+                container.replaceChildren(...groups, strengths);
+            } catch (error) {
+                console.error('Pokémon type matchup error:', error);
+                const status = document.createElement('p');
+                status.className = 'matchup-status mb-0';
+                status.setAttribute('role', 'alert');
+                status.textContent = error.message;
+                container.replaceChildren(status);
+            }
         }
 
         function renderPokemon(pokemon) {
@@ -342,6 +752,12 @@
             modelViewer.src = `https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/${pokemon.id}.glb`;
             modelViewer.poster = pokemon.sprites.other['official-artwork'].front_default || '';
             modelViewer.alt = `${name} 3D model`;
+            previousPokemonLink.href = `view.html?id=${pokemon.id - 1}`;
+            previousPokemonLink.hidden = false;
+            previousPokemonLink.setAttribute('aria-disabled', String(pokemon.id <= 1));
+            previousPokemonLink.tabIndex = pokemon.id <= 1 ? -1 : 0;
+            nextPokemonLink.href = `view.html?id=${pokemon.id + 1}`;
+            nextPokemonLink.hidden = false;
 
             const types = document.getElementById('pokeTypes');
             types.replaceChildren(...pokemon.types.map(({ type }) => {
@@ -357,53 +773,184 @@
             setStat('Hp', pokemon.stats.find(({ stat }) => stat.name === 'hp').base_stat);
             setStat('Attack', pokemon.stats.find(({ stat }) => stat.name === 'attack').base_stat);
             setStat('Defense', pokemon.stats.find(({ stat }) => stat.name === 'defense').base_stat);
+            setStat('SpecialAttack', pokemon.stats.find(({ stat }) => stat.name === 'special-attack').base_stat);
+            setStat('SpecialDefense', pokemon.stats.find(({ stat }) => stat.name === 'special-defense').base_stat);
+            setStat('Speed', pokemon.stats.find(({ stat }) => stat.name === 'speed').base_stat);
 
-            document.querySelectorAll('.roster-btn').forEach(button => {
-                const selected = Number(button.dataset.pokemonId) === pokemon.id;
-                button.classList.toggle('active', selected);
-                if (selected) button.setAttribute('aria-current', 'true');
-                else button.removeAttribute('aria-current');
-            });
+            document.getElementById('pokeHeight').textContent = `${(pokemon.height / 10).toFixed(1)} m`;
+            document.getElementById('pokeWeight').textContent = `${(pokemon.weight / 10).toFixed(1)} kg`;
+            document.getElementById('pokeAbilities').textContent = pokemon.abilities
+                .map(({ ability, is_hidden }) => `${formatLabel(ability.name)}${is_hidden ? ' (Hidden)' : ''}`)
+                .join(', ');
+            document.getElementById('pokeExperience').textContent = pokemon.base_experience ?? 'Unknown';
         }
 
-        function buildRoster(roster) {
-            const rosterList = document.getElementById('rosterList');
-            rosterList.replaceChildren(...roster.map(pokemon => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.className = 'roster-btn';
-                button.dataset.pokemonId = pokemon.id;
+        function renderSpecies(species) {
+            const englishEntry = species.flavor_text_entries.find(({ language }) => language.name === 'en');
+            const englishGenus = species.genera.find(({ language }) => language.name === 'en');
+            document.getElementById('pokeDescription').textContent = englishEntry
+                ? englishEntry.flavor_text.replace(/[\f\n\r]+/g, ' ')
+                : 'No English Pokédex description is available for this Pokémon.';
+            document.getElementById('pokeGenus').textContent = englishGenus?.genus || 'Species unknown';
+            document.getElementById('pokeHabitat').textContent = formatLabel(species.habitat?.name);
+            document.getElementById('pokeGrowthRate').textContent = formatLabel(species.growth_rate?.name);
+            document.getElementById('pokeEggGroups').textContent = species.egg_groups.length
+                ? species.egg_groups.map(({ name }) => formatLabel(name)).join(', ')
+                : 'Unknown';
+            document.getElementById('pokeCaptureRate').textContent = species.capture_rate == null
+                ? 'Unknown'
+                : `${species.capture_rate} / 255`;
+        }
 
-                const number = document.createElement('span');
-                number.className = 'roster-number';
-                number.textContent = `#${String(pokemon.id).padStart(3, '0')}`;
-                const name = document.createElement('span');
-                name.textContent = pokemon.name;
-                button.append(number, name);
+        async function createEvolutionCard(chain, currentPokemonId) {
+            const name = chain.species.name;
+            const pokemon = await fetchPokemon(name);
+            const link = document.createElement('a');
+            link.className = 'evolution-pokemon';
+            link.href = `view.html?id=${encodeURIComponent(name)}`;
+            link.setAttribute('aria-label', `View ${name}, Pokédex number ${String(pokemon.id).padStart(3, '0')}`);
+            if (pokemon.id === currentPokemonId) {
+                link.classList.add('evolution-current');
+                link.setAttribute('aria-current', 'page');
+            }
 
-                button.addEventListener('click', () => {
-                    renderPokemon(pokemon);
-                    history.replaceState(null, '', `view.html?id=${pokemon.id}`);
-                });
-                return button;
-            }));
+            const image = document.createElement('img');
+            const animatedSprite = pokemon.sprites.versions?.['generation-v']?.['black-white']?.animated?.front_default;
+            const staticSprite = pokemon.sprites.other['official-artwork'].front_default
+                || pokemon.sprites.front_default
+                || '';
+            if (animatedSprite && staticSprite) {
+                image.addEventListener('error', () => {
+                    image.src = staticSprite;
+                }, { once: true });
+            }
+            image.src = animatedSprite || staticSprite;
+            image.alt = '';
+            image.loading = 'lazy';
+            const label = document.createElement('span');
+            label.textContent = name;
+            link.append(image, label);
+            return { link, pokemon };
+        }
+
+        async function createEvolutionNode(chain, currentPokemonId) {
+            const { link } = await createEvolutionCard(chain, currentPokemonId);
+
+            const branch = document.createElement('div');
+            branch.className = 'evolution-branch';
+            branch.append(link);
+
+            if (chain.evolves_to.length) {
+                const connector = document.createElement('span');
+                connector.className = 'evolution-connector';
+                connector.setAttribute('aria-hidden', 'true');
+                connector.textContent = '→';
+
+                const children = document.createElement('div');
+                children.className = 'evolution-branches';
+                const childBranches = await Promise.all(
+                    chain.evolves_to.map(child => createEvolutionNode(child, currentPokemonId))
+                );
+                children.append(...childBranches);
+                branch.append(connector, children);
+            }
+
+            return branch;
+        }
+
+        async function createEeveeOrbit(chain, currentPokemonId) {
+            const orbit = document.createElement('div');
+            orbit.className = 'evolution-orbit';
+            orbit.setAttribute('aria-label', 'Eevee centered among its eight evolutions');
+
+            const spokes = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            spokes.classList.add('evolution-orbit-lines');
+            spokes.setAttribute('viewBox', '0 0 100 100');
+            spokes.setAttribute('aria-hidden', 'true');
+            chain.evolves_to.forEach((_, index) => {
+                const angle = (index / chain.evolves_to.length) * Math.PI * 2 - Math.PI / 2;
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', '50');
+                line.setAttribute('y1', '50');
+                line.setAttribute('x2', String(50 + Math.cos(angle) * 34));
+                line.setAttribute('y2', String(50 + Math.sin(angle) * 34));
+                spokes.append(line);
+            });
+            orbit.append(spokes);
+
+            const { link: eeveeLink } = await createEvolutionCard(chain, currentPokemonId);
+            eeveeLink.classList.add('evolution-center');
+            eeveeLink.style.left = '50%';
+            eeveeLink.style.top = '50%';
+            orbit.append(eeveeLink);
+
+            const evolutionCards = await Promise.all(chain.evolves_to.map(child => createEvolutionCard(child, currentPokemonId)));
+            evolutionCards.forEach(({ link }, index) => {
+                const angle = (index / evolutionCards.length) * Math.PI * 2 - Math.PI / 2;
+                const x = 50 + Math.cos(angle) * 34;
+                const y = 50 + Math.sin(angle) * 34;
+                link.style.left = `${x}%`;
+                link.style.top = `${y}%`;
+                orbit.append(link);
+            });
+
+            return orbit;
+        }
+
+        async function renderEvolutionLine(species) {
+            const evolutionLine = document.getElementById('evolutionLine');
+            const speciesNote = document.getElementById('speciesNote');
+            if (!species.evolution_chain?.url) {
+                evolutionLine.textContent = 'No evolution line available.';
+                return;
+            }
+
+            try {
+                const response = await fetch(species.evolution_chain.url);
+                if (!response.ok) throw new Error('Unable to load evolution data.');
+                const evolution = await response.json();
+                if (evolution.chain.species.name === 'eevee') {
+                    evolutionLine.replaceChildren(await createEeveeOrbit(evolution.chain, species.id));
+                } else {
+                    const rootBranches = await createEvolutionNode(evolution.chain, species.id);
+                    evolutionLine.replaceChildren(rootBranches);
+                }
+            } catch (error) {
+                console.error('Pokémon evolution data error:', error);
+                evolutionLine.textContent = 'Evolution information is currently unavailable.';
+                speciesNote.textContent = error.message;
+                speciesNote.hidden = false;
+            }
         }
 
         async function initializeView() {
             try {
-                const [selectedPokemon, roster] = await Promise.all([
-                    fetchPokemon(requestedPokemon),
-                    Promise.all(featuredIds.map(async id => {
-                        const pokemon = await fetchPokemon(id);
-                        pokemonCache.set(pokemon.id, pokemon);
-                        return pokemon;
-                    }))
-                ]);
-                pokemonCache.set(selectedPokemon.id, selectedPokemon);
-                buildRoster(roster);
+                const selectedPokemon = await fetchPokemon(requestedPokemon);
                 renderPokemon(selectedPokemon);
                 loader.hidden = true;
                 content.hidden = false;
+
+                const speciesNote = document.getElementById('speciesNote');
+                speciesNote.textContent = 'Loading Pokédex species information…';
+                speciesNote.hidden = false;
+                renderTypeMatchups(selectedPokemon);
+                try {
+                    const species = await fetchSpecies(selectedPokemon.id);
+                    renderSpecies(species);
+                    speciesNote.hidden = true;
+                    await renderEvolutionLine(species);
+                } catch (error) {
+                    console.error('Pokémon species data error:', error);
+                    document.getElementById('pokeDescription').textContent =
+                        'Species description is currently unavailable. Pokémon statistics and battle data are shown below.';
+                    document.getElementById('pokeGenus').textContent = 'Species details unavailable';
+                    document.getElementById('evolutionLine').textContent = 'Evolution information is unavailable.';
+                    for (const id of ['pokeHabitat', 'pokeGrowthRate', 'pokeEggGroups', 'pokeCaptureRate']) {
+                        document.getElementById(id).textContent = 'Unavailable';
+                    }
+                    speciesNote.textContent = error.message;
+                    speciesNote.hidden = false;
+                }
             } catch (error) {
                 console.error('Pokémon detail error:', error);
                 loader.hidden = true;
