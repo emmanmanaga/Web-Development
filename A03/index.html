@@ -229,12 +229,117 @@
             text-transform: uppercase;
         }
 
+        .sticky-header {
+            position: sticky;
+            top: 0.75rem;
+            z-index: 20;
+            display: flex;
+            width: min(100%, 720px);
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 2rem;
+            padding: 0.55rem;
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.76);
+            box-shadow: 0 8px 28px rgba(54, 48, 34, 0.1);
+            backdrop-filter: blur(18px) saturate(150%);
+            -webkit-backdrop-filter: blur(18px) saturate(150%);
+        }
+
         .collection-search {
-            padding: 1rem;
-            border: 1px solid #eeece6;
-            border-radius: 18px;
+            display: flex;
+            flex: 0 1 50%;
+            align-items: center;
+            gap: 0.65rem;
+            min-width: 0;
+            margin: 0;
+        }
+
+        .search-combo {
+            display: flex;
+            flex: 1 1 auto;
+            align-items: center;
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid #e5e3db;
+            border-radius: 999px;
             background: #fff;
-            box-shadow: 0 4px 16px rgba(54, 48, 34, 0.035);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .search-combo:focus-within {
+            border-color: #9baa96;
+            box-shadow: 0 0 0 3px rgba(116, 138, 112, 0.14);
+        }
+
+        .search-combo .search-input {
+            flex: 1 1 auto;
+            width: 1%;
+            min-width: 0;
+            border: 0;
+            border-radius: 0 !important;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .search-combo .search-input:focus {
+            box-shadow: none;
+        }
+
+        .search-combo .search-button {
+            flex: 0 0 auto;
+            margin: 0.2rem;
+            border-radius: 999px !important;
+            white-space: nowrap;
+        }
+
+        #paginationNav {
+            flex: 0 0 auto;
+            margin: 0 !important;
+        }
+
+        #paginationNav .pagination {
+            margin: 0;
+            flex-wrap: nowrap;
+        }
+
+        @media (max-width: 767.98px) {
+            .sticky-header {
+                width: 100%;
+                top: 0.5rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.45rem;
+                border-radius: 24px;
+            }
+
+            .collection-search {
+                flex: 1 1 auto;
+                flex-wrap: wrap;
+            }
+
+            .search-combo {
+                flex: 1 1 100%;
+            }
+
+            .collection-search #clearSearchButton {
+                flex: 1 1 auto;
+            }
+
+            #paginationNav .pagination {
+                justify-content: center;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .search-combo .search-button {
+                padding-right: 0.85rem !important;
+                padding-left: 0.85rem !important;
+            }
         }
 
         @media (min-width: 992px) {
@@ -360,20 +465,33 @@
     </header>
 
     <div class="container py-4 py-lg-5">
-        <form id="searchForm" class="collection-search row g-2 align-items-center mb-5">
-            <div class="col-12 col-sm">
-                <label class="visually-hidden" for="searchInput">Pokémon ID or name</label>
-                <input id="searchInput" class="form-control search-input rounded-pill px-3" type="search"
-                    placeholder="Search Pokémon by ID or name" required>
-            </div>
-            <div class="col-auto">
-                <button id="searchButton" class="btn search-button rounded-pill px-4" type="submit">Search</button>
-            </div>
-            <div class="col-auto">
-                <button id="clearSearchButton" class="btn btn-outline-secondary rounded-pill px-4" type="button"
-                    hidden>Show full Pokédex</button>
-            </div>
-        </form>
+        <div class="sticky-header">
+            <form id="searchForm" class="collection-search">
+                <div class="search-combo">
+                    <label class="visually-hidden" for="searchInput">Pokémon ID or name</label>
+                    <input id="searchInput" class="form-control search-input px-3" type="search"
+                        placeholder="Search Pokémon by ID or name" required>
+                    <button id="searchButton" class="btn search-button rounded-pill px-4" type="submit">Search</button>
+                </div>
+                <button id="clearSearchButton" class="btn btn-outline-secondary rounded-pill px-4" type="button" hidden>
+                    Show full Pokédex
+                </button>
+            </form>
+
+            <nav id="paginationNav" aria-label="Pokédex pages">
+                <ul class="pagination justify-content-center flex-wrap">
+                    <li class="page-item" id="previousPageItem">
+                        <button class="page-link rounded-start-pill px-4" id="previousPageButton" type="button">Previous</button>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <span class="page-link" id="currentPageLabel">Page 1</span>
+                    </li>
+                    <li class="page-item" id="nextPageItem">
+                        <button class="page-link rounded-end-pill px-4" id="nextPageButton" type="button">Next</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-end gap-3 mb-3">
             <div>
@@ -404,20 +522,6 @@
                         sleep)</span></div>
             </div>
         </div>
-
-        <nav id="paginationNav" class="mt-4" aria-label="Pokédex pages">
-            <ul class="pagination justify-content-center flex-wrap">
-                <li class="page-item" id="previousPageItem">
-                    <button class="page-link rounded-start-pill px-4" id="previousPageButton" type="button">Previous</button>
-                </li>
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link" id="currentPageLabel">Page 1</span>
-                </li>
-                <li class="page-item" id="nextPageItem">
-                    <button class="page-link rounded-end-pill px-4" id="nextPageButton" type="button">Next</button>
-                </li>
-            </ul>
-        </nav>
 
     </div>
 
