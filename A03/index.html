@@ -969,11 +969,21 @@
                         pokemonNamesById.get(a).localeCompare(pokemonNamesById.get(b), 'en', { sensitivity: 'base', numeric: true }) * direction
                     );
                 } else {
-                    filteredIds.sort((a, b) =>
-                        ((nationalDexById.get(a) - nationalDexById.get(b)) ||
-                            pokemonNamesById.get(a).localeCompare(pokemonNamesById.get(b), 'en', { sensitivity: 'base', numeric: true }) ||
-                            (a - b)) * direction
-                    );
+                    filteredIds.sort((a, b) => {
+                        const aIsAlternateForm = a !== nationalDexById.get(a);
+                        const bIsAlternateForm = b !== nationalDexById.get(b);
+                        if (aIsAlternateForm !== bIsAlternateForm) {
+                            return aIsAlternateForm ? 1 : -1;
+                        }
+
+                        return ((nationalDexById.get(a) - nationalDexById.get(b)) ||
+                            pokemonNamesById.get(a).localeCompare(
+                                pokemonNamesById.get(b),
+                                'en',
+                                { sensitivity: 'base', numeric: true }
+                            ) ||
+                            (a - b)) * direction;
+                    });
                 }
 
                 visiblePokemonIds = filteredIds;
