@@ -543,14 +543,50 @@
         const previousPageItem = document.getElementById('previousPageItem');
         const nextPageItem = document.getElementById('nextPageItem');
         const currentPageLabel = document.getElementById('currentPageLabel');
+        const collectionReturnKey = 'pokedexCollectionReturn';
+
+        let collectionReturnState = null;
+        try {
+            const savedState = sessionStorage.getItem(collectionReturnKey);
+            if (savedState) {
+                try {
+                    collectionReturnState = JSON.parse(savedState);
+                    sessionStorage.removeItem(collectionReturnKey);
+                } catch (error) {
+                    console.error('Unable to parse the saved collection state:', error);
+                    sessionStorage.removeItem(collectionReturnKey);
+                }
+            }
+        } catch (error) {
+            console.error('Unable to restore the previous collection state:', error);
+        }
 
         let pokemonIds = [];
         let pokemonById = new Map();
-        let currentPage = 1;
+        let currentPage = Number.isInteger(collectionReturnState?.currentPage)
+            ? Math.max(1, collectionReturnState.currentPage)
+            : 1;
         let perPage = Number(perPageSelect.value);
-        let searchResult = false;
+        let searchResult = collectionReturnState?.searchResult === true;
         let requestVersion = 0;
         let currentHeroId = 0;
+        let pendingScrollRestore = Number.isFinite(collectionReturnState?.scrollY)
+            ? Math.max(0, collectionReturnState.scrollY)
+            : null;
+
+        if ([6, 12, 24, 48].includes(collectionReturnState?.perPage)) {
+            perPage = collectionReturnState.perPage;
+            perPageSelect.value = String(perPage);
+        }
+        if (typeof collectionReturnState?.searchTerm === 'string') {
+            searchInput.value = collectionReturnState.searchTerm;
+        }
+
+        function restoreCollectionScroll() {
+            if (pendingScrollRestore === null) return;
+            window.scrollTo(0, pendingScrollRestore);
+            pendingScrollRestore = null;
+        }
 
         const heroTypeThemes = {
             normal: { bg: '#f0eee8', pill: '#e9e6db', text: '#5d5a50' },
@@ -724,6 +760,24 @@
           `;
         }
 
+        grid.addEventListener('click', (event) => {
+            if (!(event.target instanceof Element)) return;
+            const detailLink = event.target.closest('a[href^="view.html?id="]');
+            if (!detailLink) return;
+
+            try {
+                sessionStorage.setItem(collectionReturnKey, JSON.stringify({
+                    currentPage,
+                    perPage,
+                    searchResult,
+                    searchTerm: searchInput.value.trim(),
+                    scrollY: window.scrollY
+                }));
+            } catch (error) {
+                console.error('Unable to save the collection state:', error);
+            }
+        });
+
         function updatePagination(totalItems) {
             const totalPages = Math.max(1, Math.ceil(totalItems / perPage));
             const isSingleSearchResult = searchResult;
@@ -754,6 +808,7 @@
                 if (currentRequest !== requestVersion) return;
                 grid.innerHTML = pokemon.map(createPokemonCard).join('');
                 updatePagination(pokemonIds.length);
+                restoreCollectionScroll();
             } catch (error) {
                 if (currentRequest !== requestVersion) return;
                 console.error('Pokédex page error:', error);
@@ -775,6 +830,10 @@
                 if (!pokemonIds.length) throw new Error('The Pokédex is currently empty.');
                 if (currentRequest !== requestVersion) return;
                 updatePagination(pokemonIds.length);
+                if (searchResult && searchInput.value.trim()) {
+                    searchForm.requestSubmit();
+                    return;
+                }
                 await loadPage();
             } catch (error) {
                 if (currentRequest !== requestVersion) return;
